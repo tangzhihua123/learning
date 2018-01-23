@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prototypeApply</title>
+    <style>
+	</style>
+</head>
+
+<body>
+
+	<div class="margin-top">
+	</div>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+    <script type="text/javascript" charset="utf-8"  >
+    	
+// 借用构造函数：可以解决原型继承当中传参问题，但是父类型当中的原型对象上的成员（属性和方法）不能被继承到
+
+         function Person(name) {
+            this.name = name;
+            this.color = ['yellow', 'red'];
+         }
+         Person.prototype.getPersonName = function () {
+            return this.personName;
+         }
+
+         function Student(value){
+            // alert(value);
+            Person.call(this,value);
+            this.studentName = 'student';
+         }
+         var instance1 = new Student('instance1');
+         instance1.color.push('blue');
+         console.log(instance1.name);
+         console.log(instance1.color);
+         var instance2 = new Student('instance2');
+         console.log(instance2.name);
+         console.log(instance2.color);
+         
+
+		
+    </script>
+    
+</body>
+
+</html>

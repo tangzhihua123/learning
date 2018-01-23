@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prototype</title>
+    <style>
+		.margin-top{
+            margin-top: 20px;
+        }
+        .item-box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            text-align: center;
+            line-height: 100px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .bird{
+            background-color: blue;
+        }
+        .xique{
+            background-color: yellow;
+            display: inline-block;
+        }
+        .add-btn{
+            margin-left: 20px;
+            cursor: pointer;
+            width: 100px;
+            height: 30px;
+            background-color: green;
+            display: inline-block;
+            text-align: center;
+            line-height: 30px;
+        }
+	</style>
+</head>
+
+<body>
+
+	<div class="margin-top">
+        <div class="item-box" id="animalId">Animal</div>
+        <div class="add-btn" id="animalType" onclick='alert(instanceAnimal.type);'>查看type</div>
+	</div>
+    <div class="margin-top">
+        <div class="item-box bird" id="birdId">Bird</div>
+        <div class="add-btn" id="birdType" onclick='alert(instanceBird.type);'>查看type</div>
+    </div>
+    <div class="margin-top">
+        <div class="item-box xique" id="xiqueId">Xique</div>
+        <div class="add-btn" id="xiqueType" onclick='alert(instanceXique.type);'>查看type</div>
+        <div class="add-btn" id='addTypeId'>添加type</div>
+    </div>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+    <script type="text/javascript" charset="utf-8"  >
+    	
+//原型连： 1.引用类型值改变问题。 2.不能在不影响其他实例对象的情况下，给父类传递参数
+         function Animal() {
+            this.animalName = 'Animal';
+            this.type = ['Bird', 'fish'];
+         }
+         Animal.prototype.getAnimalName = function () {
+            // return this.personName;
+            alert(this.animalName);
+         }
+
+         function Bird(){
+            this.birdName = 'Bird';
+         }
+         // 继承Animal
+         Bird.prototype = new Animal();
+         Bird.prototype.getBirdName = function () {
+            alert(this.birdName);
+         }
+
+         function Xique(){
+            this.xiqueName = 'xique';
+         }
+         // 继承Bird
+         Xique.prototype = new Bird();
+         Xique.prototype.getXiqueName = function () {
+            alert(this.xiqueName);
+         }
+
+         var instanceXique = new Xique();
+         var instanceBird = new Bird();
+         var instanceAnimal = new Animal();
+
+         
+         var animalDiv = document.getElementById('animalId');
+         animalDiv.onclick = function () {
+           instanceAnimal.getAnimalName();
+         }
+
+         var birdDiv = document.getElementById('birdId');
+         birdDiv.onclick = function () {
+           instanceBird.getBirdName();
+           instanceBird.getAnimalName();
+         }
+
+         var xiqueDiv = document.getElementById('xiqueId');
+         xiqueDiv.onclick = function () {
+           instanceXique.getXiqueName();
+           instanceXique.getBirdName();
+           instanceXique.getAnimalName();
+         }
+
+         var addTypeDiv = document.getElementById('addTypeId');
+         addTypeDiv.onclick = function () {
+           instanceXique.type.push('鱼鱼鱼');
+           alert('添加成功');
+         }
+		
+    </script>
+    
+</body>
+
+</html>

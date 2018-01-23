@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>combination</title>
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <div class="margin-top">
+        
+    </div>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+    <script type="text/javascript" charset="utf-8"  >
+        
+//组合继承：会调用两次父类构造函数，导致父类的实例属性有一组在子类的原型中，一组在子类实例中。
+
+         function Father(type){
+            this.type = type;
+            this.showType = function(){
+                console.log('type'+this.type);
+            }
+        }
+
+        function Child(name, type){
+            Father.call(this, type);
+            this.name = name;
+            this.showName = function(){
+                console.log(this.name);
+            }
+            this.showType = function(){
+                console.log('test');
+            }
+        }
+        Child.prototype = new Father();
+        Child.prototype.constructor = Child;
+        var child02 = new Child();
+        // child02.constructor.showTime = function(){
+        child02.constructor.prototype.showTime = function(){
+            console.log(new Date());
+        }
+        var father1 = new Father();
+        
+    </script>
+    
+</body>
+
+</html>

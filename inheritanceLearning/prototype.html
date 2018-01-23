@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prototype</title>
+    <style>
+		
+	</style>
+</head>
+
+<body>
+
+	<div class="margin-top">
+
+	</div>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+    <script type="text/javascript" charset="utf-8"  >
+    	
+//原型连： 1.引用类型值改变问题。 2.不能在不影响其他实例对象的情况下，给父类传递参数
+         function Person() {
+            this.personName = 'person';
+            this.color = ['yellow', 'red'];
+         }
+         Person.prototype.getPersonName = function () {
+            // return this.personName;
+            alert(this.personName);
+         }
+
+         function Student(){
+            this.studentName = 'student';
+         }
+         // Student.prototype.getStudentName = function () {
+         //    return this.studentName;
+         // }
+         // 继承Person
+         Student.prototype = new Person();
+          Student.prototype.getStudentName = function () {
+            return this.studentName;
+         }
+         function Student1(){
+            this.student1Name = 'student1';
+         }
+         Student1.prototype = new Student();
+         Student1.prototype.getStudent1Name = function () {
+            return this.student1Name;
+         }
+         // Student1.prototype.getStudentName = function () {
+         //    return 'hello,改变了student的方法';
+         // }
+
+
+         // Student1.prototype = {
+         //    getStudent1Name: function(){
+         //        return this.student1Name;
+         //    },
+         //    getStudentName: function() {
+         //        return  'hello,改变了student的方法';
+         //    }
+         // };
+
+         // var student = new Student();
+         var instance1 = new Student1();
+
+         // console.log(student.getStudentName());
+         
+         console.log(instance1.getPersonName());
+         console.log(instance1.getStudentName());
+
+
+		
+    </script>
+    
+</body>
+
+</html>

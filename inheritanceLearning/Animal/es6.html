@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>es6</title>
+    <style>
+	</style>
+</head>
+
+<body>
+
+	<div class="margin-top">
+		
+	</div>
+    
+    <script type="text/javascript" charset="utf-8"  >
+    	
+    class Animal {
+        //构造函数
+        constructor(props) {
+          this.name = props.name || '未知';
+          this.AnimalAge = '18';
+        }
+
+        eat() {
+          alert(this.name + "在吃东西...");
+        }
+      }
+
+       //class继承
+      class Bird extends Animal {
+        //构造函数
+        constructor(props) {
+          super(props); // 调用父类的constructor(x, y)
+          this.type = props.type || "未知";
+          this.BirdAge ='11';
+        }
+
+        fly() {
+          alert(this.name + "在飞...");
+        }
+      }
+
+      var myBird = new Bird({
+        name: '鹦鹉'
+      });
+        myBird.eat();
+        myBird.fly();
+		
+    </script>
+    
+</body>
+
+</html>

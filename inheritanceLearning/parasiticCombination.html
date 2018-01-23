@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>parasiticoCombination</title>
+    <style>
+		
+	</style>
+</head>
+
+<body>
+
+	<div class="margin-top">
+		
+	</div>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+    <script type="text/javascript" charset="utf-8"  >
+    	
+// 组合寄生模式：调用一次父类的构造函数，避免在子类的原型上创建不必要的属性，原型连保持不变
+
+         function Person(name) {
+            this.PersonName = name;
+            this.color = ['yellow', 'red'];
+         }
+         Person.prototype.getPersonName = function () {
+            return this.PersonName;
+         }
+
+         function Student(value){
+            // alert(value);
+            Person.call(this,value);
+            this.studentName = 'student';
+         }
+
+         function parasitic (subType, superType) {
+            let prototype = Object.create(superType.prototype); // 创建对象
+            console.log(prototype);
+            prototype.constructor = subType;
+            subType.prototype = prototype;
+         }
+
+         function object(o){
+            function F(){};
+            F.prototype = o;
+            return new F();
+         }
+
+         // Student.prototype = new Person();
+         // Student.prototype.constructor = Student;
+         // Student.prototype.sayName = function() {
+         //    return '我的名字是'+this.studentName;
+         // };
+         parasitic(Student, Person);
+         Student.prototype.sayStudentName = function() {
+            return '我的名字是'+this.studentName;
+         };
+         var instance1 = new Student('instance1');
+         instance1.color.push('hhh');
+         // instance1.constructor.prototype.setMethods = function() {
+         //    console.log('instance1实例改变构造函数的方法或原型的方法');
+         // }
+         //  instance1.setMethods();
+         console.log(instance1.getPersonName());
+         console.log(instance1.sayStudentName());
+         // console.log(instance1.sayName());
+                  
+
+		
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>combination</title>
+    <style>
+	</style>
+</head>
+
+<body>
+
+	<div class="margin-top">
+		
+	</div>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+    <script type="text/javascript" charset="utf-8"  >
+    	
+//组合继承：会调用两次父类构造函数，导致父类的实例属性有一组在子类的原型中，一组在子类实例中。
+
+         function Person(name) {
+            this.PersonName = name;
+            this.color = ['yellow', 'red'];
+         }
+         Person.prototype.getPersonName = function () {
+            return this.PersonName;
+         }
+
+         function Student(value){
+            // alert(value);
+            Person.call(this,value); // 第二次调用父类构造函数
+            this.studentName = 'student';
+         }
+         Student.prototype = new Person();  // 第一次调用父类构造函数
+         Student.prototype.constructor = Student;
+         Student.prototype.sayName = function() {
+            return '我的名字是'+this.studentName;
+         };
+         var instance1 = new Student('instance1');
+         var instance2 = new Student('instance1');
+         // instance1.constructor.prototype.setMethods = function() {
+         //    console.log('instance1实例改变构造函数的方法或原型的方法');
+         // }
+          // instance1.setMethods();
+         instance1.color.push('hhh');
+         console.log(instance1.getPersonName());
+         console.log(instance1.sayName());
+         console.log('instance1====color',instance1.color);
+         console.log('instance2====color',instance2.color);
+
+         console.log('Student instanceof Person===',Student instanceof Person); // false
+         console.log('instance1 instanceof Student===',instance1 instanceof Student);// true
+         console.log('instance1 instanceof Person===',instance1 instanceof Person);// true
+
+
+         console.log('instance1 constructor Student===',instance1.constructor == Student); // 指回为true，不指回为false
+         console.log(instance1.constructor);
+        
+
+
+                  
+
+		
+    </script>
+    
+</body>
+
+</html>
